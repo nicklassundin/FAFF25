@@ -1,3 +1,4 @@
+#Refreaction calculation of Glass material BK7
 BK7n <- function(a){
 	a1 <- 2.271176
 	a2 <- -9.700709/10^9
@@ -12,11 +13,12 @@ BK7n <- function(a){
 	return(n)
 }
 
-R <- 0.15
-D <- 0.1
-n1 <- 1.0
-n2 <- 1.5
+R <- 0.15					#Radious
+D <- 0.1					#Diameter of lens
+n1 <- 1.0					#Refraction index
+n2 <- 1.5					#Refraction index
 
+#Gaussian function (Radious,Hight,incoming refraction index, material refraction index, Use approximation BOOLEAN)
 Gaussian <- function(r,h,n1,n2,b){
 	a1 <- 0					#Paraxial Approximation
 	if(!b){
@@ -27,25 +29,27 @@ Gaussian <- function(r,h,n1,n2,b){
 	return(f)
 }
 
-#Incomming light angle in relation of the norm.
+#Refraction angle to norm of surface
 alph2 <- function(r,a1,n1,n2){
 	a2 <- asin(sin(a1)*(n1/n2))
 	return(a2)
 }
+#Light angle without Paraxial Approxation to norm of surface
 alph1 <- function(h,r){
 	a1 <- asin(h/r)
 	return(a1)
 }
 
+#Paraxoide Approximation applied
 Gauss_Approx <- function(x) Gaussian(R,x,n1,n2,TRUE);
 fa <- Vectorize(Gauss_Approx);
+#No Paraxoide Approximation
 curve(fa,from=0,to=0.1, xlab="h", ylab="f");
-
 Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
 curve(f,from=0,to=0.1, xlab="h", ylab="f", add=TRUE);
 
-
+#confirm
 print("Done!")
 
 "
@@ -56,4 +60,4 @@ BK7n(400/10^9)
 BK7n(500/10^9)
 BK7n(600/10^9)
 BK7n(700/10^9)
-"
+
