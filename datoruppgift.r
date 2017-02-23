@@ -1,17 +1,3 @@
-#Refreaction calculation of Glass material BK7
-BK7n <- function(a){
-	a1 <- 2.271176
-	a2 <- -9.700709/10^9
-	a3 <- 0.0110971/10^6
-	a4 <- 4.622809/10^11
-	a5 <- 1.616105/10^11
-	a6 <- -8.285043/10^13
-	n4 <- (a1+a2*a^2+a3/a^2+a4/a^4+a5*1/a^6+a6/a^8)^2
-	n2 <- sqrt(n4)
-	n <- sqrt(n2)
-	#print(n)
-	return(n)
-}
 
 R <- 0.15					#Radious
 D <- 0.1					#Diameter of lens
@@ -40,17 +26,36 @@ alph1 <- function(h,r){
 	return(a1)
 }
 
+#Refreaction index calculation of Glass material BK7
+BK7n <- function(a){
+	a1 <- 2.271176
+	a2 <- -9.700709/10^9
+	a3 <- 0.0110971/10^6
+	a4 <- 4.622809/10^11
+	a5 <- 1.616105/10^11
+	a6 <- -8.285043/10^13
+	n4 <- (a1+a2*a^2+a3/a^2+a4/a^4+a5*1/a^6+a6/a^8)^2
+	n2 <- sqrt(n4)
+	n <- sqrt(n2)
+	print(n)
+	return(n)
+}
+
 #Paraxoide Approximation applied
 Gauss_Approx <- function(x) Gaussian(R,x,n1,n2,TRUE);
 fa <- Vectorize(Gauss_Approx);
+plot.function(fa, from=0, to=0.1, xlab="h", ylab="f");
 #No Paraxoide Approximation
-curve(fa,from=0,to=0.1, xlab="h", ylab="f");
 Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
-curve(f,from=0,to=0.1, xlab="h", ylab="f", add=TRUE);
+plot.function(f,from=0,to=0.1, xlab="h", ylab="f", add=TRUE, col="red") 
 
-#confirm
-print("Done!")
+x11()
+n2 <- Vectorize(BK7n);
+plot.function(n2, from=(400/10^9), to=(700/10^9), xlab=beta, ylab="n")
+
+#BK7 replace material of lens
+
 
 "
 Gaussian(R,h,n1,n2,TRUE)
@@ -60,4 +65,4 @@ BK7n(400/10^9)
 BK7n(500/10^9)
 BK7n(600/10^9)
 BK7n(700/10^9)
-
+"
