@@ -3,7 +3,7 @@ R <- 0.15					#Radious
 D <- 0.1					#Diameter of lens
 n1 <- 1.0					#Refraction index
 n2 <- 1.5					#Refraction index
-
+R <- D*0.51
 #Gaussian function (Radious,Hight,incoming refraction index, material refraction index, Use approximation BOOLEAN)
 Gaussian <- function(r,h,n1,n2,b){
 	a1 <- 0					#Paraxial Approximation
@@ -37,36 +37,27 @@ BK7n <- function(a){
 	n4 <- (a1+a2*a^2+a3/a^2+a4/a^4+a5*1/a^6+a6/a^8)^2
 	n2 <- sqrt(n4)
 	n <- sqrt(n2)
-	print(n)
 	return(n)
 }
-par(mfrow = c(2,2))
+par(mfrow = c(2,2));
 
 #Paraxoide Approximation applied
 Gauss_Approx <- function(x) Gaussian(R,x,n1,n2,TRUE);
 fa <- Vectorize(Gauss_Approx);
-plot.function(fa, from=0, to=0.1, xlab="h", ylab="f");
+plot.function(fa, from=0, to=0.1, xlab="Hight", ylab="Focus Point",
+		ylim=c(fa(0)-0.01,0.25));
 #No Paraxoide Approximation
 Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
-plot.function(f,from=0,to=0.1, xlab="h", ylab="f", add=TRUE, col="red") 
+plot.function(f,from=0,to=0.1, add=TRUE, col="red",
+		);
+n2v <- Vectorize(BK7n);
+plot.function(n2v, from=(400/10^9), to=(700/10^9), ylab="Reflection Index", xlab="Wavelength");
 
-n2 <- Vectorize(BK7n);
-plot.function(n2, from=(400/10^9), to=(700/10^9), xlab=beta, ylab="n")
-
-#BK7 replace material of lens
+#BK7 replace material of lens	
 h <- 0.025;
-f_chrom <- function(a) Gaussian(R,h,n1,BK7n(a),FALSE);
-chrom <- Vectorize(f_chrom);
-plot.function(chrom, from=(400/10^9), to=(700/10^9))
+f_chrom <- function(x) Gaussian(R,h,n1,BK7n(x),FALSE);
+v_chrom <- Vectorize(f_chrom);
 
+plot.function(v_chrom, from=(400/10^9), to=(700/10^9), xlab="", ylab="");
 
-"
-Gaussian(R,h,n1,n2,TRUE)
-Gaussian(R,h,n1,n2,FALSE)
-
-BK7n(400/10^9)
-BK7n(500/10^9)
-BK7n(600/10^9)
-BK7n(700/10^9)
-"
