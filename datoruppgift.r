@@ -40,6 +40,7 @@ BK7n <- function(a){
 	print(n)
 	return(n)
 }
+par(mfrow = c(2,2))
 
 #Paraxoide Approximation applied
 Gauss_Approx <- function(x) Gaussian(R,x,n1,n2,TRUE);
@@ -50,11 +51,14 @@ Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
 plot.function(f,from=0,to=0.1, xlab="h", ylab="f", add=TRUE, col="red") 
 
-x11()
 n2 <- Vectorize(BK7n);
 plot.function(n2, from=(400/10^9), to=(700/10^9), xlab=beta, ylab="n")
 
 #BK7 replace material of lens
+h <- 0.025;
+f_chrom <- function(a) Gaussian(R,h,n1,BK7n(a),FALSE);
+chrom <- Vectorize(f_chrom);
+plot.function(chrom, from=(400/10^9), to=(700/10^9))
 
 
 "
