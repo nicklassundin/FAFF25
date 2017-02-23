@@ -3,7 +3,6 @@ R <- 0.15					#Radious
 D <- 0.1					#Diameter of lens
 n1 <- 1.0					#Refraction index
 n2 <- 1.5					#Refraction index
-R <- D*0.51
 #Gaussian function (Radious,Hight,incoming refraction index, material refraction index, Use approximation BOOLEAN)
 Gaussian <- function(r,h,n1,n2,b){
 	a1 <- 0					#Paraxial Approximation
@@ -23,6 +22,9 @@ alph2 <- function(r,a1,n1,n2){
 #Light angle without Paraxial Approxation to norm of surface
 alph1 <- function(h,r){
 	a1 <- asin(h/r)
+	if(is.nan(a1)){
+		return
+	}
 	return(a1)
 }
 
@@ -44,12 +46,12 @@ par(mfrow = c(2,2));
 #Paraxoide Approximation applied
 Gauss_Approx <- function(x) Gaussian(R,x,n1,n2,TRUE);
 fa <- Vectorize(Gauss_Approx);
-plot.function(fa, from=0, to=0.1, xlab="Hight", ylab="Focus Point",
+plot.function(fa, from=0, to=D/2, xlab="Hight", ylab="Focus Point",
 		ylim=c(fa(0)-0.01,0.25));
 #No Paraxoide Approximation
 Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
-plot.function(f,from=0,to=0.1, add=TRUE, col="red",
+plot.function(f,from=0,to=D/2, add=TRUE, col="red",
 		);
 n2v <- Vectorize(BK7n);
 plot.function(n2v, from=(400/10^9), to=(700/10^9), ylab="Reflection Index", xlab="Wavelength");
