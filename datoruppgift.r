@@ -88,13 +88,24 @@ tau_c <- function(r1,r2) {	#Lifespan in cavity for photons
 }
 
 #Differential eqvations:
-N_prim <- function(t,Phi,N){		#Number of Ions
+N_prim <- function(Phi,N){		#Number of Ions
 	y <- P-B*N*Phi-N/tau;
 	return(y)
 }
 
-Phi_prim <- function(t, Phi, N) {	#
+Phi_prim <- function(Phi, N) {	#
 	y <- B*Va*N*(Phi+1)-Phi/tau_c;
 	return(y)
 }
+
+#Differential Solver
+Num_Solv_Diff <- function(Tn, h, f){
+	i <- 0:
+	N <- N0;
+	for(i<Tn){
+		i <- i+h;
+		N <- N + N_prim()
+	}
+}
+
 
