@@ -65,3 +65,36 @@ f_chrom <- function(a){
 }
 v_chrom <- Vectorize(f_chrom);
 plot.function(v_chrom, from=(400/10^9), to=(700/10^9), xlab="", ylab="");
+
+#Assignment no. 2
+La <- 0.2			#Length
+D <- 0.008 			#Diameter
+t <- 200/10^6			#pulse duration
+tau <- 230/10^6			#Lifespan
+N0 <- 1.4*10^20			#Number of Ions cm^-3
+sigma <- 2.8/10^23 		#
+c <- 299792458			#Speed of Light m/s
+
+V <- L*pi*(D/2)^2;		#cavity Volyme
+B <- sigma*c/V;			#Probability of stimulated emission ion and photon
+
+N_inf <- 0.01*N0;
+P <- N_inf/tau;			#Pump strength
+
+
+tau_c <- function(r1,r2) {	#Lifespan in cavity for photons
+	tau_r <- -2*L/(c*(ln(r1)+ln(r2)));
+	return(tau_r)
+}
+
+#Differential eqvations:
+N_prim <- function(t,Phi,N){		#Number of Ions
+	y <- P-B*N*Phi-N/tau;
+	return(y)
+}
+
+Phi_prim <- function(t, Phi, N) {	#
+	y <- B*Va*N*(Phi+1)-Phi/tau_c;
+	return(y)
+}
+
