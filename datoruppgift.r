@@ -58,8 +58,10 @@ plot.function(n2v, from=(400/10^9), to=(700/10^9), ylab="Reflection Index", xlab
 
 #BK7 replace material of lens	
 h <- 0.025;
-f_chrom <- function(x) Gaussian(R,h,n1,BK7n(x),FALSE);
+f_chrom <- function(a){
+	bk7n2 <- BK7n(a);
+	f <- Gaussian(R, h, n1, bk7n2, FALSE);
+	return(f)
+}
 v_chrom <- Vectorize(f_chrom);
-
 plot.function(v_chrom, from=(400/10^9), to=(700/10^9), xlab="", ylab="");
-
