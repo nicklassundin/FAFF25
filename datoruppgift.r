@@ -67,7 +67,7 @@ v_chrom <- Vectorize(f_chrom);
 plot.function(v_chrom, from=(400/10^9), to=(700/10^9), xlab="", ylab="");
 
 #Assignment no. 2
-La <- 0.2			#Length
+L <- 0.2			#Length
 D <- 0.008 			#Diameter
 t <- 200/10^6			#pulse duration
 tau <- 230/10^6			#Lifespan
@@ -75,15 +75,19 @@ N0 <- 1.4*10^20			#Number of Ions cm^-3
 sigma <- 2.8/10^23 		#
 c <- 299792458			#Speed of Light m/s
 
-V <- L*pi*(D/2)^2;		#cavity Volyme
+V <- La*pi*(D/2)^2;		#cavity Volyme
 B <- sigma*c/V;			#Probability of stimulated emission ion and photon
 
 N_inf <- 0.01*N0;
 P <- N_inf/tau;			#Pump strength
 
+#Assignment 2:b definitions
+R1 <- 1;
+R2 <- 0.05;
+T <- 200/10^6;
 
 tau_c <- function(r1,r2) {	#Lifespan in cavity for photons
-	tau_r <- -2*L/(c*(ln(r1)+ln(r2)));
+	tau_r <- -2*L/(c*(log(r1)+log(r2)));
 	return(tau_r)
 }
 
@@ -94,18 +98,31 @@ N_prim <- function(Phi,N){		#Number of Ions
 }
 
 Phi_prim <- function(Phi, N) {	#
-	y <- B*Va*N*(Phi+1)-Phi/tau_c;
+	y <- B*V*N*(Phi+1)-Phi/tau_c(R1,R2);
+	if(is.infinite(y)){
+		y <- 0;
+	}
 	return(y)
 }
 
 #Differential Solver
-Num_Solv_Diff <- function(Tn, h, f){
-	i <- 0:
-	N <- N0;
-	for(i<Tn){
-		i <- i+h;
-		N <- N + N_prim()
+Num_Solv_Diff <- function(Tn, s){
+	m <- matrix(1:(2*s), 2);
+	i <- 1;
+	h <- Tn/s;
+	N <- N0+0;
+	Phi <- 0;
+	m[0,0] <- N;
+	m[0,1] <- Phi;
+	while(i<s){
+		N <- N + N_prim(Phi, N);
+		Phi <- Phi + Phi_prim(Phi, N);
+		m[0,i] <- N;
+		m[1,i] <- Phi;
+		i <- i+1;
 	}
+	return(m);
 }
 
-
+m <- Num_Solv_Diff(T,30)
+print(m)
