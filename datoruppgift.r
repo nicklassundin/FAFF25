@@ -75,7 +75,7 @@ N0 <- 1.4*10^20			#Number of Ions cm^-3
 sigma <- 2.8/10^23 		#
 c <- 299792458			#Speed of Light m/s
 
-V <- La*pi*(D/2)^2;		#cavity Volyme
+V <- L*pi*(D/2)^2;		#cavity Volyme
 B <- sigma*c/V;			#Probability of stimulated emission ion and photon
 
 N_inf <- 0.01*N0;
@@ -107,22 +107,27 @@ Phi_prim <- function(Phi, N) {	#
 
 #Differential Solver
 Num_Solv_Diff <- function(Tn, s){
-	m <- matrix(1:(2*s), 2);
+	m <- matrix(3, 1:(2*s));
 	i <- 1;
 	h <- Tn/s;
 	N <- N0+0;
 	Phi <- 0;
-	m[0,0] <- N;
-	m[0,1] <- Phi;
+	m[0,0] <- 0;
+	m[0,1] <- N;
+	m[0,2] <- Phi;
 	while(i<s){
 		N <- N + N_prim(Phi, N);
 		Phi <- Phi + Phi_prim(Phi, N);
-		m[0,i] <- N;
-		m[1,i] <- Phi;
+		m[i,0] <- i*h;
+		m[i,1] <- N;
+		m[i,2] <- Phi;
 		i <- i+1;
 	}
-	return(m);
+	n_v <- as.vector(m[0,], mode="any");
+	phi_v <- as.vector(m[1,], mode="any");	
+	return(c(n_v, phi_v));
 }
 
 m <- Num_Solv_Diff(T,30)
 print(m)
+plot.function(m[0]);
