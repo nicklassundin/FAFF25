@@ -90,33 +90,6 @@
 \subsection*{[OPTIONAL]}
 \begin{description}
 \item [CUST\_PW\_FILE:] <URL HERE>
-\end{description}}
-
-%% Language and font encodings
-\usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{enumitem}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-
-%% Useful packages
-\usepackage{amsmath}
-\usepackage{graphicx}
-
-\title{COSC-4765-HW2-TEMPLATE}
-\author{YourNAME}
-\lhead{FIRSTNAME LASTNAME}
-\rhead{W\#}
-\cfoot{UWYO Computer Security COSC-4765 Homework 2}
-
-
-\begin{document}
-
-
-\section*{\#1 Information Gathering Tool}
-\begin{description}
-\item [Tool Name:] <TOOL NAME HERE>
 \end{description}
-\subsection*{ HOW <TOOL NAME> WORKS:}
-<DESCRIPTION HERE>
+
+\end{document}
