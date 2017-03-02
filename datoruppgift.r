@@ -106,28 +106,34 @@ Phi_prim <- function(Phi, N) {	#
 }
 
 #Differential Solver
-Num_Solv_Diff <- function(Tn, s){
-	m <- matrix(3, 1:(2*s));
+Num_Solv_Diff_Gen <- function(Tn, s){
+	m <- matrix(3, 1:s);
 	i <- 1;
 	h <- Tn/s;
 	N <- N0+0;
 	Phi <- 0;
 	m[0,0] <- 0;
-	m[0,1] <- N;
-	m[0,2] <- Phi;
+	m[1,0] <- N;
+	m[2,0] <- Phi;
 	while(i<s){
 		N <- N + N_prim(Phi, N);
 		Phi <- Phi + Phi_prim(Phi, N);
-		m[i,0] <- i*h;
-		m[i,1] <- N;
-		m[i,2] <- Phi;
+		m[0,i] <- i*h;
+		m[1,i] <- N;
+		m[2,i] <- Phi;
 		i <- i+1;
 	}
-	n_v <- as.vector(m[0,], mode="any");
-	phi_v <- as.vector(m[1,], mode="any");	
-	return(c(n_v, phi_v));
+	return m;
 }
 
-m <- Num_Solv_Diff(T,30)
-print(m)
-plot.function(m[0]);
+Num_Diff_N <- function(){
+	#generate if doesn't exist
+	#return value of N
+}
+
+Num_Diff_Phi <- function(){
+	#generate if not exist
+	#return value of Phi
+}
+
+
