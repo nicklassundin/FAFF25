@@ -22,24 +22,21 @@ alph2 <- function(r,a1,n1,n2){
 #Light angle without Paraxial Approxation to norm of surface
 alph1 <- function(h,r){
 	a1 = asin(h/r)
-	if(is.nan(a1)){
-		return
-	}
 	return(a1)
 }
 
 #Refreaction index calculation of Glass material BK7
-BK7n <- function(a){
+BK7n <- function(x){
 	a1 = 2.271176
-	a2 = -9.700709/10^9
-	a3 = 0.0110971/10^6
-	a4 = 4.622809/10^11
-	a5 = 1.616105/10^11
-	a6 = -8.285043/10^13
-	n4 = (a1+a2*a^2+a3/a^2+a4/a^4+a5*1/a^6+a6/a^8)^2
-	n2 = sqrt(n4)
-	n = sqrt(n2)
-	return(n)
+	a2 = -9.700709*(10^-3)*(10^-6)^-2
+	a3 = 0.0110971*(10^-6)*(10^-6)^2
+	a4 = 4.622809*(10^-5)*(10^-6)^4
+	a5 = 1.616105*(10^-5)*(10^-6)^6
+	a6 = -8.285043*(10^-7)*(10^-6)^8
+	n2 = a1+a2*x^2+a3*x^(-2)+a4*x^(-4)+a5*x^(-6)+a6*x^(-8)
+	n = a1;
+	n = abs(sqrt(as.complex(n2)));
+	return(n);
 }
 par(mfrow = c(2,3));
 
@@ -47,24 +44,42 @@ par(mfrow = c(2,3));
 Gauss_Approx <- function(x) Gaussian(R,x,n1,n2,TRUE);
 fa <- Vectorize(Gauss_Approx);
 plot.function(fa, from=0, to=D/2, xlab="Hight", ylab="Focus Point",
-		ylim=c(fa(0)-0.01,0.25));
+		ylim=c(fa(0)-0.01,0.20));
+
 #No Paraxoide Approximation
 Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
-plot.function(f,from=0,to=D/2, add=TRUE, col="red",
-		);
+plot.function(f,from=0,to=D/2, add=TRUE, col="red");
+
+#Write to file
+pdf("para_approx.pdf", width=7, height=5)
+plot.function(fa, from=0, to=D/2, xlab="Hight", ylab="Focus Point",
+		ylim=c(fa(0)-0.01,0.20));
+plot.function(f,from=0,to=D/2, add=TRUE, col="red");
+dev.off()
+
+#BK7n Reflection index
 n2v <- Vectorize(BK7n);
-plot.function(n2v, from=(400/10^9), to=(700/10^9), ylab="Reflection Index", xlab="Wavelength");
+plot.function(n2v, from=(400/(10^9)), to=(700/(10^9)), ylab="Reflection Index", xlab="Wavelength");
+
+#Write to file
+pdf("BK7_index.pdf", width=7, height=5)
+plot.function(n2v, from=(400/(10^9)), to=(700/(10^9)), ylab="Reflection Index", xlab="Wavelength");
+dev.off()
 
 #BK7 replace material of lens	
 h <- 0.025;
-f_chrom <- function(a){
-	bk7n2 =  BK7n(a);
-	f = Gaussian(R, h, n1, bk7n2, FALSE);
+f_chrom <- function(x){
+	f = Gaussian(R, h, n1, BK7n(x), FALSE);
 	return(f)
 }
 v_chrom <- Vectorize(f_chrom);
-plot.function(v_chrom, from=(400/10^9), to=(700/10^9), xlab="", ylab="");
+plot.function(v_chrom, from=(400/(10^9)), to=(700/(10^9)), xlab="", ylab="");
+
+#Write to file
+pdf("BK7_abo.pdf", width=7, height=5)
+plot.function(v_chrom, from=(400/(10^9)), to=(700/(10^9)), xlab="", ylab="");
+dev.off()
 
 #Assignment no. 2
 L <- 0.2			#Length
@@ -131,3 +146,28 @@ print("Phi");
 print(x1);
 plot(x0);
 plot(x1);
+
+#Write to file #1
+pdf("para_approx.pdf", width=7, height=5)
+plot.function(fa, from=0, to=D/2, xlab="Hight", ylab="Focus Point",
+		ylim=c(fa(0)-0.01,0.20));
+plot.function(f,from=0,to=D/2, add=TRUE, col="red");
+dev.off()
+
+#Write to file #2
+pdf("BK7_index.pdf", width=7, height=5)
+plot.function(n2v, from=(400/(10^9)), to=(700/(10^9)), ylab="Reflection Index", xlab="Wavelength");
+dev.off()
+
+#Write to file #3
+pdf("BK7_abo.pdf", width=7, height=5)
+plot.function(v_chrom, from=(400/(10^9)), to=(700/(10^9)), xlab="", ylab="");
+dev.off()
+
+
+
+#Write to file #4
+pdf("N.pdf", width=7, height=5)
+plot(x0)
+dev.off()
+
