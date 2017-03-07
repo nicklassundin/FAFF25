@@ -51,21 +51,9 @@ Gauss <- function(x) Gaussian(R,x,n1,n2,FALSE);
 f <- Vectorize(Gauss);
 plot.function(f,from=0,to=D/2, add=TRUE, col="red");
 
-#Write to file
-pdf("para_approx.pdf", width=7, height=5)
-plot.function(fa, from=0, to=D/2, xlab="Hight", ylab="Focus Point",
-		ylim=c(fa(0)-0.01,0.20));
-plot.function(f,from=0,to=D/2, add=TRUE, col="red");
-dev.off()
-
 #BK7n Reflection index
 n2v <- Vectorize(BK7n);
 plot.function(n2v, from=(400/(10^9)), to=(700/(10^9)), ylab="Reflection Index", xlab="Wavelength");
-
-#Write to file
-pdf("BK7_index.pdf", width=7, height=5)
-plot.function(n2v, from=(400/(10^9)), to=(700/(10^9)), ylab="Reflection Index", xlab="Wavelength");
-dev.off()
 
 #BK7 replace material of lens	
 h <- 0.025;
@@ -75,11 +63,6 @@ f_chrom <- function(x){
 }
 v_chrom <- Vectorize(f_chrom);
 plot.function(v_chrom, from=(400/(10^9)), to=(700/(10^9)), xlab="", ylab="");
-
-#Write to file
-pdf("BK7_abo.pdf", width=7, height=5)
-plot.function(v_chrom, from=(400/(10^9)), to=(700/(10^9)), xlab="", ylab="");
-dev.off()
 
 #Assignment no. 2
 L <- 0.2			#Length
@@ -140,20 +123,17 @@ Phi <- function(x){
 }
 x0 = N(seq(0, 0.0002, length=20));
 x1 = Phi(seq(0, 0.0002, length=20));
-print("N");
-print(x0);
-print("Phi");
-print(x1);
 plot(x0);
 plot(x1);
+dev.off()
 
 #Write to file #1
 pdf("para_approx.pdf", width=7, height=5)
-plot.function(fa, from=0, to=D/2, xlab="Hight", ylab="Focus Point",
-		ylim=c(fa(0)-0.01,0.20));
-plot.function(f,from=0,to=D/2, add=TRUE, col="red");
+plot.function(f,from=0,to=D/2, col="red");
+plot.function(fa, from=0, to=D/2, xlab="Hight",add=TRUE, ylab="Focus Point");
 dev.off()
 
+print(2)
 #Write to file #2
 pdf("BK7_index.pdf", width=7, height=5)
 plot.function(n2v, from=(400/(10^9)), to=(700/(10^9)), ylab="Reflection Index", xlab="Wavelength");
@@ -163,8 +143,6 @@ dev.off()
 pdf("BK7_abo.pdf", width=7, height=5)
 plot.function(v_chrom, from=(400/(10^9)), to=(700/(10^9)), xlab="", ylab="");
 dev.off()
-
-
 
 #Write to file #4
 pdf("N.pdf", width=7, height=5)

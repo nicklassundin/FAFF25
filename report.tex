@@ -13,6 +13,7 @@
 \section{Assignment 1: Projection Error}
 
 \subsection{Implemation}
+Implemeted a general Gaussian formel for standard beam 
 
 \subsection{Resultat}
 
@@ -22,7 +23,7 @@ With Paraxial Approximation focus point always becomes $0.15$ m, independent
 of where on the lins a beam parallel with the optic normal axis refract on the lens.
 Mean while without the approximation it will drift futher away from the lins 
 when the standard beam closes the edge of the lens.
-$$write$$ $$down$$ $$difference$$ $$[placeholder]$$
+ $$[placeholder]$$
 
 \subsubsection{B: Material Replacement}
 \includegraphics[scale=0.6]{BK7_index.pdf}
@@ -57,7 +58,14 @@ without to large errors in calculations, depending on specification limitation o
 \appendix
 \section{Implementation R Code}
 \subsection{Assignment I:}
-\lstinputlisting[numbers=left, keepspaces=true, firstline=0, lastline=68, language=R, basicstyle=\ttfamily\tiny]{datoruppgift.r}
+\label{1:gua}
+\lstinputlisting[title=Guassian Function, numbers=left, keepspaces=true, firstline=7, lastline=15, language=R, basicstyle=\ttfamily\tiny]{datoruppgift.r}
+\label{1:para}
+\lstinputlisting[title=Paraxial Approximation, numbers=left, keepspaces=true, firstline=18, lastline=21, language=R, basicstyle=\ttfamily\tiny]{datoruppgift.r}
+\label{1:nopara}
+\lstinputlisting[title=No Paraxial Approximation, numbers=left, keepspaces=true, firstline=23, lastline=26, language=R, basicstyle=\ttfamily\tiny]{datoruppgift.r}
+\label{1:BK7}
+\lstinputlisting[title=BK7 refraction index, numbers=left, keepspaces=true, firstline=29, lastline=40, language=R, basicstyle=\ttfamily\tiny]{datoruppgift.r}
 \subsection{Assignment II: }
 \lstinputlisting[numbers=left, keepspaces=true, firstline=68, basicstyle=\ttfamily\tiny]{datoruppgift.r}
 \end{document}
