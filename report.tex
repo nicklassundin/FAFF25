@@ -20,7 +20,7 @@
 \section{Avbildningsfel}
 
 \subsection{Teori}
-Som Newton upptäckte så har olika våglängder av ljus olika brytningsindex i samma material, detta kallas kromatisk aberration. Fel kan uppstå även med monokromatisk ljus vid användandet av sfäriska prismor, detta kallas då sfärisk aberration. I uppgiften skall man med hjälp av, så kallad, ray tracing beräkna de fel som genereras. Genom att simulera standardstrålar och beräkna dess bana.  
+Som Newton upptäckte så har olika våglängder av ljus olika brytningsindex i samma material, detta kallas kromatisk aberration. Fel kan uppstå även med monokromatiskt ljus vid användandet av sfäriska prismor, detta kallas då sfärisk aberration. I uppgiften skall man med hjälp av, så kallad, ray tracing beräkna de fel som genereras. Genom att simulera standardstrålar och beräkna dess bana.  
 
 Brytningslagen, $n_1 \cdot sin(\alpha _1) = n_2 \cdot sin(\alpha _2) $ används för att beräkna var fokalpunkten hamnar beroende på de två mediernas brytningsindex samt in och utfallsvinklarna vid övergången. 
 
@@ -34,8 +34,8 @@ $a_5 = 1.616105 \cdot 10^{-5} \cdot \mu m^6$\\
 $a_6 = -8.285043 \cdot 10^{-7} \cdot \mu m^8$
 
 \subsection{Metod}
-Först beräknas felet, som en sfärisk prism genererar när man ökar höjden,$h$, från den optiska axeln. Låt brytningindex $n_1 = 1$ och $n_2 = 1,5$ samt vara oberoende våglängd. Strålen infaller mot en konvex yta med krökningsradie $R = +0,15m$ och en diameter $D = 10cm$, samt inkommer parallelt med den optiska axeln. 
-Resultaten av beräkningar plottas till en graf, figur \ref{1a} , och i den markeras även brännpunkten som fås med paraxialapproximationen, där bara strålar nära optiska axeln används $\alpha_1 = 0$.
+Först beräknas felet som en sfärisk prism genererar när man ökar höjden,$h$, från den optiska axeln. Låt brytningindex vara $n_1 = 1$ och $n_2 = 1,5$ samt vara oberoende våglängd. Strålen infaller mot en konvex yta med krökningsradie $R = +0,15m$ och en diameter $D = 10cm$, samt inkommer parallelt med den optiska axeln. 
+Resultaten av beräkningar plottas till en graf, figur \ref{1a}, och i den markeras även brännpunkten som fås med paraxialapproximationen, där bara strålar nära optiska axeln används, då $\alpha_1 = 0$.
 
 \begin{figure}[h!]
   \centering
@@ -53,7 +53,7 @@ Nästa steg är att beräkna hur brytningsindex varierar beroende på ljusets v�
 	\label{1b}
 \end{figure} 
 
-Slutligen skall kromatisk aberration illustreras då ljus infaller på en lins av BK7. Linsen storlek kvarstår från tidigare men brytningsindex skall beräknas för de olika våglängderna. Ljuset infaller på en höjd av $2,5 cm$ över optiska axeln. Svaret skall illustreras in en graf, figur \ref{1c}, där fokalpunkten är en funktion av våglängden.
+Slutligen skall kromatisk aberration illustreras då ljus infaller på en lins av BK7. Linsen storlek kvarstår från tidigare men brytningsindex skall beräknas för de olika våglängderna. Ljuset infaller på en höjd av $2,5 cm$ över optiska axeln. Svaret skall illustreras i en graf, figur \ref{1c}, där fokalpunkten är en funktion av våglängden.
 
 \begin{figure}[h!]
   \centering
@@ -73,17 +73,17 @@ Fokalpunkten i BK7 har en varians på $2,74 10^{-5}m$ vilket kan ses i figur \re
 %går från 0.1666803 till 0.1667077
 
 \subsection{Slutsats}
-Enligt beräkningarna så är det bevisat att både kromatisk och sfärisk aberration existerar. Dock tycks det vara så att den sfäriska är betydligt större än den kromatiska. I alla fall för det material vi testat för.
+Enligt beräkningarna så är det bevisat att både kromatisk och sfärisk aberration existerar. Dock tycks det vara så att den sfäriska är betydligt större än den kromatiska, i alla fall för det material vi testat för.
 
 \subsection{Analys}
-Felen som uppstår i experimenten kan man anse är väldigt låga. Det får en att tro att approximatiner kan användas vid de flesta beräkningar och man behöver varken ta hänsyn till höjden ovanför den optiska axeln eller varierande våglängd. Dock fick vi en väldigt begränsad mängd material att testa på. Materialet BK7 sägs vara en vanlig glassort och kan därför vara ett material som är framtaget för dess bra egenskaper. Detta går inte att utröna utan djupare efterforskning i materialet samt fler tester med andra material.
+Felen som uppstår i experimenten kan man anse är väldigt låga. Det får en att tro att approximationer kan användas vid de flesta beräkningar och man behöver varken ta hänsyn till höjden ovanför den optiska axeln eller den varierande våglängd. Dock fick vi en väldigt begränsad mängd material att testa på. Materialet BK7 sägs vara en vanlig glassort och kan därför vara ett material som är framtaget för dess bra egenskaper. Detta går inte att utröna utan djupare efterforskning i materialet samt fler tester med andra material.
 
 
 \section{Pulsade lasrar}
 
 \subsection{Teori}
 
-En laserstråle kan genereras genom att först excistera joner i en kristall till en högre energinivå, när de sedan deexciteras till utgångsläget så avges fotoner. För att rikta fotonerna så placeras två parralella speglar på var sin sida av kristallen, den ena med en liten springa fär att släppa ut ljuset. För att excistera joner så nyttjas en blixtlampa. På grund av utformningen så kommer endast de fotoner som är vinkelräta mot speglarna att kunna pasera springan medans resterande reflekteras bort.  
+En laserstråle kan genereras genom att först excitera joner i en kristall till en högre energinivå, när de sedan deexciteras till utgångsläget så avges fotoner. För att rikta fotonerna så placeras två parralella speglar på var sin sida av kristallen, den ena med en liten springa för att släppa ut ljuset. För att excitera joner så nyttjas en blixtlampa. På grund av utformningen så kommer endast de fotoner som är vinkelräta mot speglarna att kunna passera springan medans resterande reflekteras bort.  
 
 \subsection{Metod}
 Följande ekvationer och konstanter var givna av uppgiften.\\
@@ -99,14 +99,14 @@ $V=V_a=L\pi(D/2)^2$\\
 $L=20cm$\\
 $D=8mm$\\
 $\tau_c=-2L/(c \cdot (ln R_1 + ln R_2))$\\
-$c =$ ljusets hastighet i vakum\\
+$c =$ ljusets hastighet i vakuum\\
 $R_1$ och $R_2 =$ speglarnas reflektans\\
 
 För att kunna beräkna de två differentialekvationerna $N(t)$ samt $\phi(t)$ beräknas de över hela tidsramen enligt följande två ekvationer.\\
 $N(T_{i+1})=N(T_i)+N'(T_i) \cdot \delta t $\\
 $\phi(T_{i+1})=\phi(T_i)+\phi'(T_i) \cdot \delta t $\\
 
-Detta enligt härledning från uppgiften. Genom att låta $i$ variera från $0$ till $2000000$ och $\delta t=10^{-10}s$ beräknas hela intervallet och resultaten lagras i en array. Detta för att slippa beräkna tidigare värden rekursivt vilket hade vart en sämmre lösning.
+Genom att låta $i$ variera från $0$ till $2000000$ och $\delta t=10^{-10}s$ beräknas hela intervallet och resultaten lagras i en vektor. Detta för att slippa beräkna tidigare värden rekursivt vilket hade vart en sämre lösning.
 
 Genom att sätta $R_1 = 1$ och $R_2 = 0,05$ kan man nu plotta de två funktionerna beroende på tiden i intervallet $T \in [0,200 \mu s]$. Resultatet finns i figur \ref{2bN} och \ref{2bPhi} 
 
