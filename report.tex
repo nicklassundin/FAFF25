@@ -83,7 +83,34 @@ Felen som uppstår i experimenten kan man anse är väldigt låga. Det får en a
 
 \subsection{Teori}
 
+En laserstråle kan genereras genom att först excistera joner i en kristall till en högre energinivå, när de sedan deexciteras till utgångsläget så avges fotoner. För att rikta fotonerna så placeras två parralella speglar på var sin sida av kristallen, den ena med en liten springa fär att släppa ut ljuset. För att excistera joner så nyttjas en blixtlampa. På grund av utformningen så kommer endast de fotoner som är vinkelräta mot speglarna att kunna pasera springan medans resterande reflekteras bort.  
+
 \subsection{Metod}
+Följande ekvationer och konstanter var givna av uppgiften.\\
+$N'(t)=P-BN(t)\phi(t)-\frac{N(t)}{\tau}$\\
+$\phi(t)=BV_aN(t)(\phi(t)+1)-\frac{\phi(t)}{\tau_c}$\\
+$P=N_\infty/\tau$\\
+$N_\infty=0,01 \cdot N_0$\\
+$N_0=1,4 \cdot 10^{20} cm^{-3} $\\
+$\tau = 230 \mu s$\\
+$B=\sigma c / V$\\
+$\sigma = 2,8 \cdot 10^{-23}$\\
+$V=V_a=L\pi(D/2)^2$\\
+$L=20cm$\\
+$D=8mm$\\
+$\tau_c=-2L/(c \cdot (ln R_1 + ln R_2))$\\
+$c =$ ljusets hastighet i vakum\\
+$R_1$ och $R_2 =$ speglarnas reflektans\\
+
+För att kunna beräkna de två differentialekvationerna $N(t)$ samt $\phi(t)$ beräknas de över hela tidsramen enligt följande två ekvationer.\\
+$N(T_{i+1})=N(T_i)+N'(T_i) \cdot \delta t $\\
+$\phi(T_{i+1})=\phi(T_i)+\phi'(T_i) \cdot \delta t $\\
+
+Detta enligt härledning från uppgiften. Genom att låta $i$ variera från $0$ till $2000000$ och $\delta t=10^{-10}s$ beräknas hela intervallet och resultaten lagras i en array. Detta för att slippa beräkna tidigare värden rekursivt vilket hade vart en sämmre lösning.
+
+Genom att sätta $R_1 = 1$ och $R_2 = 0,05$ kan man nu plotta de två funktionerna beroende på tiden i intervallet $T \in [0,200 \mu s]$. Resultatet finns i figur \ref{2bN} och \ref{2bPhi} 
+
+Sist skall den ena spegelns reflektans bero på tiden. Fram tills det att $t=195 \mu s$ är $R_1=10^{-7}$ för att sedan bli $1$. Graferna som genereras finns i \ref{2cN} och \ref{2cPhi}.
 
 \subsection{Resultat}
 
